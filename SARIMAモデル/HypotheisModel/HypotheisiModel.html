@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>model</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/uedamizuki/B3/Experiment/model.py">/Users/uedamizuki/B3/Experiment/model.py</a></font></td></tr></table>
+    <p><tt>新規コロナウィルス感染者数を予測するプログラム<br>
+&nbsp;<br>
+新規感染者数のデータを使用<br>
+都市部の人口密度を使用</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pulp.amply.html">pulp.amply</a><br>
+<a href="pulp.apis.html">pulp.apis</a><br>
+<a href="pulp.apis.choco_api.html">pulp.apis.choco_api</a><br>
+<a href="pulp.apis.coin_api.html">pulp.apis.coin_api</a><br>
+<a href="collections.html">collections</a><br>
+<a href="configparser.html">configparser</a><br>
+<a href="pulp.constants.html">pulp.constants</a><br>
+<a href="pulp.constants.html">pulp.constants</a><br>
+</td><td width="25%" valign=top><a href="pulp.apis.core.html">pulp.apis.core</a><br>
+<a href="pulp.apis.cplex_api.html">pulp.apis.cplex_api</a><br>
+<a href="ctypes.html">ctypes</a><br>
+<a href="datetime.html">datetime</a><br>
+<a href="pulp.apis.glpk_api.html">pulp.apis.glpk_api</a><br>
+<a href="pulp.apis.gurobi_api.html">pulp.apis.gurobi_api</a><br>
+<a href="itertools.html">itertools</a><br>
+<a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="pulp.apis.mipcl_api.html">pulp.apis.mipcl_api</a><br>
+<a href="pulp.apis.mosek_api.html">pulp.apis.mosek_api</a><br>
+<a href="numpy.html">numpy</a><br>
+<a href="os.html">os</a><br>
+<a href="pandas.html">pandas</a><br>
+<a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+<a href="pulp.pulp.html">pulp.pulp</a><br>
+<a href="pulp.apis.scip_api.html">pulp.apis.scip_api</a><br>
+</td><td width="25%" valign=top><a href="pulp.sparse.html">pulp.sparse</a><br>
+<a href="subprocess.html">subprocess</a><br>
+<a href="sys.html">sys</a><br>
+<a href="time.html">time</a><br>
+<a href="pulp.utilities.html">pulp.utilities</a><br>
+<a href="warnings.html">warnings</a><br>
+<a href="pulp.apis.xpress_api.html">pulp.apis.xpress_api</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="model.html#Optimizer">Optimizer</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Optimizer">class <strong>Optimizer</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>予測モデル、予測値を計算する。<br>
+予測モデルを複数回十国することにより最適化を行う<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Optimizer-Pred_y"><strong>Pred_y</strong></a>(self, X, idx)</dt><dd><tt>予測モデル<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;inf&nbsp;(int):&nbsp;感染者数項(3日分の平均)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cont&nbsp;(int):&nbsp;接触頻度項<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pred_y&nbsp;(int):&nbsp;予測値<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pred_y&nbsp;(int):&nbsp;予測値</tt></dd></dl>
+
+<dl><dt><a name="Optimizer-X_valid"><strong>X_valid</strong></a>(self, X)</dt><dd><tt>乱数によりXの値を制約の中でシフトさせ、新たなXを発生させる<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rand&nbsp;(int):&nbsp;-1~1の乱数を5個発生<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dx&nbsp;(list):&nbsp;Xの変化幅<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;(list):&nbsp;&nbsp;X_listで定義された最大最小値内にクリップ<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;(list):&nbsp;X_listで定義された最大最小値内にクリップ</tt></dd></dl>
+
+<dl><dt><a name="Optimizer-__init__"><strong>__init__</strong></a>(self, DF=       日付  感染拡大以前との比較  前日との比較  ...       inf  inf_2 T_inf
+0   4月18日       -80.2   -33.1  ...       NaN    NaN   589
+1   4月19日       -79.9     1.3  ...       NaN    NaN   376
+2   4月20日       -69.2    40.9  ...       NaN    NaN   345
+3   4月21日       -69.7    -1.4  ...       NaN    NaN   391
+4   4月22日       -69.3     1.1  ...       NaN    NaN   442
+5   4月23日       -69.7    -1.3  ...       NaN    NaN   435
+6   4月24日       -68.3     4.6  ...       NaN    NaN   442
+7   4月25日       -78.9   -27.5  ...       NaN    NaN   382
+8   4月26日       -81.9   -14.3  ...       NaN    NaN   220
+9   4月27日       -70.2    51.3  ...       NaN    NaN   174
+10  4月28日       -70.8    -1.9  ...       NaN    NaN   282
+11  4月29日       -81.7   -31.8  ...       NaN    NaN   223
+12  4月30日       -69.7    52.1  ...       NaN    NaN   201
+13   5月1日       -75.7    -0.6  ...       NaN    NaN   266
+14   5月2日       -82.4   -27.5  ...       NaN    NaN   302
+15   5月3日       -85.5   -17.5  ...       NaN    NaN   203
+16   5月4日       -84.8     4.6  ...       NaN    NaN   176
+17   5月5日       -84.6     1.3  ...       NaN    NaN   120
+18   5月6日       -84.5     0.6  ...       NaN    NaN   104
+19   5月7日       -71.0    87.2  ...       NaN    NaN    96
+20   5月8日       -71.4    -1.4  ...   155.564     98    88
+21   5月9日       -77.9   -22.9  ...   149.688     94   114
+22  5月10日       -81.6   -16.7  ...   150.208     92    69
+23  5月11日       -67.2    55.6  ...   140.514     94    45
+24  5月12日       -68.6    -4.3  ...   138.737     62    80
+25  5月13日       -68.3     1.0  ...   137.728     38    55
+26  5月14日       -67.6     2.2  ...   139.284     54   100
+27  5月15日       -65.7     5.7  ...   145.568     61    50
+28  5月16日       -78.1   -25.1  ...    147.92     54    57
+29  5月17日       -78.8    -3.6  ...   141.977     56    26
+..    ...         ...     ...  ...       ...    ...   ...
+51   6月8日       -48.9     9.4  ...   10.2935     46    21
+52   6月9日       -45.1    -5.6  ...   25.2416     35    45
+53  6月10日       -44.4    -4.6  ...   22.8375     24    38
+54  6月11日       -46.0   -10.3  ...   20.5896     43    42
+55  6月12日       -43.7    -3.1  ...   19.4493     58    61
+56  6月13日       -50.0   -21.5  ...   18.3628     59    45
+57  6月14日       -51.9   -14.5  ...   17.2345     65    75
+58  6月15日       -44.7    12.2  ...   15.7735     70    72
+59  6月16日       -42.8    -7.9  ...   14.5944     49    44
+60  6月17日       -42.5    -8.2  ...   13.9829     36    46
+61  6月18日       -44.7   -12.7  ...   13.5696     53    70
+62  6月19日       -43.5    -7.6  ...   13.2644     58    58
+63  6月20日       -38.5    -5.9  ...   12.8269     62    64
+64  6月21日       -49.1   -56.1  ...   12.4131     75    55
+65  6月22日       -40.9    11.4  ...   12.4578     77    43
+66  6月23日       -38.7    -3.3  ...      12.6     61    57
+67  6月24日       -42.0   -15.8  ...   13.2852     44    96
+68  6月25日       -39.1    -5.7  ...   13.8618     77    82
+69  6月26日       -47.8    -8.1  ...   14.0498     15   105
+70  6月27日       -35.5   -12.4  ...   14.0286     16    92
+71  6月28日       -44.9   -22.2  ...   14.1605     15   113
+72  6月29日       -41.6     2.3  ...   14.2741     14   110
+73  6月30日       -45.0   -13.7  ...   14.4916     10   138
+74   7月1日       -39.8    -5.1  ...   13.1182      7   145
+75   7月2日       -39.2   -10.7  ...   12.4399     11   156
+76   7月3日       -38.7    -8.5  ...   11.8412     13   169
+77   7月4日       -47.7   -25.7  ...    11.838    228   397
+78   7月5日       -55.8   -23.7  ...   12.2976    NaN   208
+79   7月6日       -43.1    20.0  ...   12.2278    NaN   176
+80   7月7日       -48.1    -9.0  ...   13.2919    NaN   211
+
+[81 rows x 12 columns], X_list=array([[ 0.    , 20.    ,  0.6   ,  5.91  ],
+       [10.    , 20.    ,  1.5   , 11.    ],
+       [ 8.    , 30.    ,  1.5   , 13.    ],
+       [-1.    , 10.    ,  0.4   ,  1.8705],
+       [-1.    , 10.    ,  0.4   ,  0.8421]]), idx_last=73, idx_start=20, column_list=['new_p', 'last_year_density', 'inf'], optim_num=20000)</dt><dd><tt>初期値の設定<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DF&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;使用するデータフレーム<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X_list&nbsp;(list):&nbsp;最適化するパラメータの範囲と刻み、初期値<br>
+&nbsp;&nbsp;&nbsp;&nbsp;idx_start&nbsp;(int):&nbsp;学習に使用するデータフレームの最初のidx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;idx_last&nbsp;(int):&nbsp;学習に使用するデータフレームの最後のidx<br>
+&nbsp;&nbsp;&nbsp;&nbsp;column_list&nbsp;(list):&nbsp;データフレームの中から使用するデータを決める列名リスト<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obtim_naum&nbsp;(list):&nbsp;学習回数<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;なし。</tt></dd></dl>
+
+<dl><dt><a name="Optimizer-calc_loss"><strong>calc_loss</strong></a>(self, X)</dt><dd><tt>指定範囲のデータを用いてモデルの予測誤差を計算<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;(int):&nbsp;実測値<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;(int):&nbsp;予測値<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loss&nbsp;(int):&nbsp;誤差<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loss&nbsp;(int):&nbsp;誤差</tt></dd></dl>
+
+<dl><dt><a name="Optimizer-closing"><strong>closing</strong></a>(self, X)</dt><dd><tt>終了処理、最終モデルの予測データの保存　グラフ化<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DF&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;学習済みモデルで予測した結果を保存<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;(int):&nbsp;予測値<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DF_plot&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;プロット<br>
+Reutrns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DF&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;予測した結果を保存したデータフレーム</tt></dd></dl>
+
+<dl><dt><a name="Optimizer-optim"><strong>optim</strong></a>(self)</dt><dd><tt>最適化処理<br>
+&nbsp;<br>
+Argments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;(list):&nbsp;初期値<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X_min&nbsp;(list):&nbsp;現在の誤差の最小値を保存<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loss_min&nbsp;(list):&nbsp;予測した結果の誤差<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DF&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;最適化処理されたデータをデータフレームに保存<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X_min(list):&nbsp;最適化されたときの最小の誤差<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DF&nbsp;(<a href="builtins.html#object">object</a>):&nbsp;最適化されたデータを保存したデータフレーム</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-calc_inf_num"><strong>calc_inf_num</strong></a>(idx)</dt></dl>
+ <dl><dt><a name="-clock"><strong>clock</strong></a> = process_time(...)</dt><dd><tt>process_time()&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Process&nbsp;time&nbsp;for&nbsp;profiling:&nbsp;sum&nbsp;of&nbsp;the&nbsp;kernel&nbsp;and&nbsp;user-space&nbsp;CPU&nbsp;time.</tt></dd></dl>
+ <dl><dt><a name="-maketrans"><strong>maketrans</strong></a>(x, y=None, z=None, /)</dt><dd><tt>Return&nbsp;a&nbsp;translation&nbsp;table&nbsp;usable&nbsp;for&nbsp;str.translate().<br>
+&nbsp;<br>
+If&nbsp;there&nbsp;is&nbsp;only&nbsp;one&nbsp;argument,&nbsp;it&nbsp;must&nbsp;be&nbsp;a&nbsp;dictionary&nbsp;mapping&nbsp;Unicode<br>
+ordinals&nbsp;(integers)&nbsp;or&nbsp;characters&nbsp;to&nbsp;Unicode&nbsp;ordinals,&nbsp;strings&nbsp;or&nbsp;None.<br>
+Character&nbsp;keys&nbsp;will&nbsp;be&nbsp;then&nbsp;converted&nbsp;to&nbsp;ordinals.<br>
+If&nbsp;there&nbsp;are&nbsp;two&nbsp;arguments,&nbsp;they&nbsp;must&nbsp;be&nbsp;strings&nbsp;of&nbsp;equal&nbsp;length,&nbsp;and<br>
+in&nbsp;the&nbsp;resulting&nbsp;dictionary,&nbsp;each&nbsp;character&nbsp;in&nbsp;x&nbsp;will&nbsp;be&nbsp;mapped&nbsp;to&nbsp;the<br>
+character&nbsp;at&nbsp;the&nbsp;same&nbsp;position&nbsp;in&nbsp;y.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;third&nbsp;argument,&nbsp;it<br>
+must&nbsp;be&nbsp;a&nbsp;string,&nbsp;whose&nbsp;characters&nbsp;will&nbsp;be&nbsp;mapped&nbsp;to&nbsp;None&nbsp;in&nbsp;the&nbsp;result.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>DATA</strong> =        日付  感染拡大以前との比較  前日との比較  宣言前（７日)と比較  新規感染者...  -9.0        -4.6     211
+
+[81 rows x 5 columns]<br>
+<strong>DF</strong> =        日付  感染拡大以前との比較  前日との比較  ...       inf  in.....   13.2919    NaN   211
+
+[81 rows x 12 columns]<br>
+<strong>DF00</strong> =        日付  感染拡大以前との比較  前日との比較  ...       inf  in.....   13.2919    NaN   211
+
+[81 rows x 12 columns]<br>
+<strong>DF_plot</strong> = 66    61
+67    44
+68    77
+69    15
+70    16
+71    15
+72    14
+73    10
+Name: inf_2, dtype: object<br>
+<strong>DIRNAME</strong> = '/Users/uedamizuki/.pyenv/versions/anaconda3-5.1.0/lib/python3.6/site-packages/pulp/apis'<br>
+<strong>EPS</strong> = 1e-07<br>
+<strong>LpBinary</strong> = 'Binary'<br>
+<strong>LpCategories</strong> = {'Binary': 'Binary', 'Continuous': 'Continuous', 'Integer': 'Integer'}<br>
+<strong>LpConstraintEQ</strong> = 0<br>
+<strong>LpConstraintGE</strong> = 1<br>
+<strong>LpConstraintLE</strong> = -1<br>
+<strong>LpConstraintSenses</strong> = {-1: '&lt;=', 0: '=', 1: '&gt;='}<br>
+<strong>LpContinuous</strong> = 'Continuous'<br>
+<strong>LpCplexLPLineSize</strong> = 78<br>
+<strong>LpInteger</strong> = 'Integer'<br>
+<strong>LpMaximize</strong> = -1<br>
+<strong>LpMinimize</strong> = 1<br>
+<strong>LpSenses</strong> = {-1: 'Maximize', 1: 'Minimize'}<br>
+<strong>LpSolution</strong> = {-2: 'Unbounded', -1: 'No Solution Exists', 0: 'No Solution Found', 1: 'Optimal Solution Found', 2: 'Integer Solution Found'}<br>
+<strong>LpSolutionInfeasible</strong> = -1<br>
+<strong>LpSolutionIntegerFeasible</strong> = 2<br>
+<strong>LpSolutionNoSolutionFound</strong> = 0<br>
+<strong>LpSolutionOptimal</strong> = 1<br>
+<strong>LpSolutionUnbounded</strong> = -2<br>
+<strong>LpSolverDefault</strong> = &lt;pulp.apis.coin_api.PULP_CBC_CMD object&gt;<br>
+<strong>LpStatus</strong> = {-3: 'Undefined', -2: 'Unbounded', -1: 'Infeasible', 0: 'Not Solved', 1: 'Optimal'}<br>
+<strong>LpStatusInfeasible</strong> = -1<br>
+<strong>LpStatusNotSolved</strong> = 0<br>
+<strong>LpStatusOptimal</strong> = 1<br>
+<strong>LpStatusToSolution</strong> = {-3: 0, -2: -2, -1: -1, 0: 0, 1: 1}<br>
+<strong>LpStatusUnbounded</strong> = -2<br>
+<strong>LpStatusUndefined</strong> = -3<br>
+<strong>Opti</strong> = &lt;model.Optimizer object&gt;<br>
+<strong>PULPCFGFILE</strong> = 'pulp.cfg.osx'<br>
+<strong>VERSION</strong> = '2.1'<br>
+<strong>X</strong> = 75    156.0
+76    169.0
+77    397.0
+78    208.0
+79    176.0
+80    211.0
+Name: T_inf, dtype: float64<br>
+<strong>X_list</strong> = array([[ 0.    , 20.    ,  0.6   ,  5.91  ],
+   ...5],
+       [-1.    , 10.    ,  0.4   ,  0.8421]])<br>
+<strong>Y</strong> = 75     11.0
+76     13.0
+77    228.0
+78      0.0
+79      0.0
+80      0.0
+Name: inf_2, dtype: float64<br>
+<strong>arch</strong> = '64'<br>
+<strong>cbc_path</strong> = 'cbc'<br>
+<strong>coef_list</strong> = [0.593, 0.9237, 1.081, 1.112, 1.189, 1.199, 0.851]<br>
+<strong>coinMP_path</strong> = ['/Users/uedamizuki/.pyenv/versions/anaconda3-5.1....python3.6/site-packages/pulp/apis/../libCoinMP.so']<br>
+<strong>column_list</strong> = ['new_p', 'last_year_density', 'inf']<br>
+<strong>config_filename</strong> = '/Users/uedamizuki/.pyenv/versions/anaconda3-5.1....python3.6/site-packages/pulp/apis/../pulp.cfg.osx'<br>
+<strong>cplex_dll_path</strong> = '/usr/ilog/cplex/bin/x86_rhel4.0_3.4/libcplex110.so'<br>
+<strong>devnull</strong> = -3<br>
+<strong>glpk</strong> = None<br>
+<strong>glpk_path</strong> = 'glpsol'<br>
+<strong>gurobi_path</strong> = '/opt/gurobi201/linux32/lib/python2.5'<br>
+<strong>gurobipy</strong> = None<br>
+<strong>idx</strong> = 77<br>
+<strong>idx_last</strong> = 73<br>
+<strong>idx_start</strong> = 20<br>
+<strong>ilm_cplex_license</strong> = r'LICENSE your-enterprise\nRUNTIME NEVER ...'<br>
+<strong>ilm_cplex_license_signature</strong> = 0<br>
+<strong>is_64bits</strong> = True<br>
+<strong>lastID</strong> = 78<br>
+<strong>last_T_PCR_p</strong> = 74<br>
+<strong>log</strong> = &lt;Logger pulp.apis.core (WARNING)&gt;<br>
+<strong>monday_idx</strong> = 74<br>
+<strong>operating_system</strong> = 'osx'<br>
+<strong>optim_X</strong> = array([ 5.04239372, 10.        , 11.        ,  2.68551645,  0.63928927])<br>
+<strong>optim_num</strong> = 20000<br>
+<strong>pred_last</strong> = 80<br>
+<strong>pulp_cbc_path</strong> = '/Users/uedamizuki/.pyenv/versions/anaconda3-5.1....te-packages/pulp/apis/../solverdir/cbc/osx/64/cbc'<br>
+<strong>pulp_choco_path</strong> = '/Users/uedamizuki/.pyenv/versions/anaconda3-5.1....lverdir/choco/choco-parsers-with-dependencies.jar'<br>
+<strong>scip_path</strong> = 'scip'<br>
+<strong>week</strong> = ['月', '火', '水', '木', '金', '土', '日']<br>
+<strong>yaposib</strong> = None</td></tr></table>
+</body></html>
