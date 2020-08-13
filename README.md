@@ -27,13 +27,16 @@ this project for zikken3 in 2020s.
 
 ## Installation
 
-	https://github.com/e185725/aaa.git
+	https://github.com/uedamizuki/Experimetn_datamining_Group2
 	
 	Download ZIP
 
 ## Author
 
+e185719@ie.u-ryukyu.ac.jp
 e185725@ie.u-ryukyu.ac.jp
+e185757@ie.u-ryukyu.ac.jp
+e185768@ie.u-ryukyu.ac.jp
 
 ## License
 MIT License
