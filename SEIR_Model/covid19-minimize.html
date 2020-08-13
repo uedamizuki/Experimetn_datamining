@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module covid19-minimize</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>covid19-minimize</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/ssato/Experiments3/Experimetn_datamining_Group2/SEIR_Model/covid19-minimize.py">/Users/ssato/Experiments3/Experimetn_datamining_Group2/SEIR_Model/covid19-minimize.py</a></font></td></tr></table>
+    <p><tt>Prediction&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;new&nbsp;infections&nbsp;COVID-19&nbsp;using&nbsp;SEIR&nbsp;model<br>
+Optimize&nbsp;parameters&nbsp;using&nbsp;minimize@scipy<br>
+&nbsp;<br>
+Used&nbsp;datasets<br>
+https://github.com/kaz-ogiwara/covid19/blob/master/data/summary.csv<br>
+Copyright&nbsp;(c)&nbsp;2020&nbsp;TOYO&nbsp;KEIZAI&nbsp;ONLINE</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top><a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-estimate_i"><strong>estimate_i</strong></a>(ini_state, beta, lp, ip)</dt><dd><tt>Function&nbsp;which&nbsp;estimate&nbsp;i&nbsp;from&nbsp;seir&nbsp;model&nbsp;func<br>
+&nbsp;<br>
+Parameters:<br>
+----------<br>
+ini_state&nbsp;:&nbsp;numpy.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ini_state[0],&nbsp;ini_state[1],&nbsp;ini_state[2]]&nbsp;=&nbsp;[S,&nbsp;E,&nbsp;I]<br>
+beta&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Infectious&nbsp;rate<br>
+lp&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Latency&nbsp;period<br>
+ip&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Infectious&nbsp;period<br>
+&nbsp;<br>
+Returns:<br>
+----------<br>
+est[:,2]&nbsp;:&nbsp;numpy.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Evaluation&nbsp;result&nbsp;of&nbsp;calculating&nbsp;differential&nbsp;equation</tt></dd></dl>
+ <dl><dt><a name="-input_data"><strong>input_data</strong></a>(csv_input, reg_period, test_period)</dt><dd><tt>Append&nbsp;number&nbsp;of&nbsp;new&nbsp;infections&nbsp;to&nbsp;list<br>
+&nbsp;<br>
+Parameters:<br>
+----------<br>
+csv_input&nbsp;:&nbsp;pandas.core.frame.DataFrame<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Use&nbsp;pd.read_csv&nbsp;to&nbsp;read&nbsp;CSV&nbsp;file<br>
+reg_period&nbsp;:&nbsp;int&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Estimation&nbsp;period<br>
+test_period&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Test&nbsp;period<br>
+&nbsp;<br>
+Returns:<br>
+----------<br>
+data_covid&nbsp;:&nbsp;list&nbsp;of&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;new&nbsp;infections&nbsp;per&nbsp;day</tt></dd></dl>
+ <dl><dt><a name="-seir_eq"><strong>seir_eq</strong></a>(v, t, beta, lp, ip)</dt><dd><tt>Define&nbsp;differencial&nbsp;equation&nbsp;of&nbsp;seir&nbsp;model<br>
+&nbsp;<br>
+Parameters:<br>
+----------<br>
+v&nbsp;:&nbsp;numpy.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[v[0],&nbsp;v[1],&nbsp;v[2]]&nbsp;=&nbsp;[S,&nbsp;E,&nbsp;I]<br>
+t&nbsp;:&nbsp;numpy.ndarray&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;small&nbsp;changes&nbsp;in&nbsp;the&nbsp;estimation&nbsp;period<br>
+beta&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Infectious&nbsp;rate<br>
+lp&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Latency&nbsp;period<br>
+ip&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Infectious&nbsp;period<br>
+&nbsp;<br>
+Returns:<br>
+----------<br>
+[s,&nbsp;e,&nbsp;i,&nbsp;r]&nbsp;:&nbsp;list&nbsp;of&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;-&gt;&nbsp;Differencial&nbsp;equation&nbsp;of&nbsp;susceptible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;e&nbsp;-&gt;&nbsp;Differencial&nbsp;equation&nbsp;of&nbsp;incubation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;-&gt;&nbsp;Differencial&nbsp;equation&nbsp;of&nbsp;infectious<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;-&gt;&nbsp;Differencial&nbsp;equation&nbsp;of&nbsp;removed</tt></dd></dl>
+ <dl><dt><a name="-y"><strong>y</strong></a>(params)</dt><dd><tt>Define&nbsp;logscale&nbsp;likelihood&nbsp;function<br>
+&nbsp;<br>
+Parameters:<br>
+----------<br>
+params&nbsp;:&nbsp;list&nbsp;of&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Parameters&nbsp;during&nbsp;optimization<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[params[0],&nbsp;params[1],&nbsp;params[2]]&nbsp;=&nbsp;[beta,&nbsp;lp,&nbsp;ip]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+Returns:<br>
+----------<br>
+np.sum(est_i-data_covid_reg*np.log(np.abs(est_i)))&nbsp;:&nbsp;numpy.ndarray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Logscale&nbsp;likelihood&nbsp;function</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Death</strong> = 974<br>
+<strong>Death_T</strong> = 984<br>
+<strong>Discharged</strong> = 16563<br>
+<strong>Discharged_T</strong> = 18580<br>
+<strong>E0</strong> = 79<br>
+<strong>E0_T</strong> = 332<br>
+<strong>EST_PERIOD</strong> = 14<br>
+<strong>I0</strong> = 17537<br>
+<strong>I0_T</strong> = 19564<br>
+<strong>N</strong> = 126082384<br>
+<strong>N_T</strong> = 126080104<br>
+<strong>Positive</strong> = 79<br>
+<strong>Positive_T</strong> = 332<br>
+<strong>R0</strong> = 0.8275430855031127<br>
+<strong>S0</strong> = 0<br>
+<strong>S0_T</strong> = 0<br>
+<strong>TEST_PERIOD</strong> = 7<br>
+<strong>__warningregistry__</strong> = {'version': 76, ('overflow encountered in double_scalars', &lt;class 'RuntimeWarning'&gt;, 59): True, ('overflow encountered in double_scalars', &lt;class 'RuntimeWarning'&gt;, 60): True}<br>
+<strong>ax1</strong> = &lt;matplotlib.axes._subplots.AxesSubplot object&gt;<br>
+<strong>ax2</strong> = &lt;matplotlib.axes._subplots.AxesSubplot object&gt;<br>
+<strong>beta</strong> = 1<br>
+<strong>beta_const</strong> = 0.9562867975125353<br>
+<strong>csv_input</strong> =      year  month  ...  pcr_tests_total_insurance...p/stf/newpage_12467.html
+
+[157 rows x 22 columns]<br>
+<strong>data_covid</strong> = [79, 99, 88, 111, 110, 132, 123, 158, 215, 314, 226, 152, 199, 194, 332, 407, 328, 482, 204, 256, ...]<br>
+<strong>data_covid_reg</strong> = [79, 99, 88, 111, 110, 132, 123, 158, 215, 314, 226, 152, 199, 194]<br>
+<strong>data_covid_test</strong> = [332, 407, 328, 482, 204, 256, 440]<br>
+<strong>dt</strong> = 0.01<br>
+<strong>est_end_date</strong> = datetime.date(2020, 7, 8)<br>
+<strong>est_start_date</strong> = datetime.date(2020, 6, 24)<br>
+<strong>fig</strong> = &lt;Figure size 1294x1600 with 2 Axes&gt;<br>
+<strong>gamma_const</strong> = 1.1555734248340093<br>
+<strong>ini_state</strong> = [126082384, 0, 79, 17537]<br>
+<strong>ini_state_t</strong> = [126080104, 0, 332, 19564]<br>
+<strong>ip</strong> = 1<br>
+<strong>labs_ax1</strong> = ['data', 'estimation']<br>
+<strong>latest</strong> = '2020/7/15'<br>
+<strong>latest_date</strong> = datetime.date(2020, 7, 15)<br>
+<strong>lns1</strong> = [&lt;matplotlib.lines.Line2D object&gt;]<br>
+<strong>lns2</strong> = [&lt;matplotlib.lines.Line2D object&gt;]<br>
+<strong>lns3</strong> = [&lt;matplotlib.lines.Line2D object&gt;]<br>
+<strong>lns4</strong> = [&lt;matplotlib.lines.Line2D object&gt;, &lt;matplotlib.lines.Line2D object&gt;, &lt;matplotlib.lines.Line2D object&gt;, &lt;matplotlib.lines.Line2D object&gt;]<br>
+<strong>lns_ax1</strong> = [&lt;matplotlib.lines.Line2D object&gt;, &lt;matplotlib.lines.Line2D object&gt;]<br>
+<strong>lp</strong> = 1.0277715530410966e-07<br>
+<strong>mnmz</strong> =  final_simplex: (array([[ 9.56286798e-01,  1.027...[9.56286798e-01, 1.02777155e-07, 1.15557342e+00])<br>
+<strong>now</strong> = 157<br>
+<strong>reg_fin</strong> = array([332.        , 363.59162121, 398.18833366,...       477.56666001, 523.00342812, 572.76097268])<br>
+<strong>t</strong> = array([0.000e+00, 1.000e-02, 2.000e-02, ..., 1.397e+01, 1.398e+01,
+       1.399e+01])<br>
+<strong>t_n</strong> = array([0.000e+00, 1.000e-02, 2.000e-02, ..., 2.097e+01, 2.098e+01,
+       2.099e+01])<br>
+<strong>t_t</strong> = array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06,...       6.93, 6.94, 6.95, 6.96, 6.97, 6.98, 6.99])<br>
+<strong>test_end_date</strong> = datetime.date(2020, 7, 15)<br>
+<strong>test_start_date</strong> = datetime.date(2020, 7, 9)</td></tr></table>
+</body></html>
