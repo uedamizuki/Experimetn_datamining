@@ -34,9 +34,9 @@ this project for zikken3 in 2020s.
 ## Used Datasets
 
 ### SEIR_Model
-https:/github.com/kaz-ogiwara/covid19/blob/master/data/summary.csv
+https://github.com/kaz-ogiwara/covid19/blob/master/data/summary.csv
 
-Copyright (c) 2020 TOYO KEIZAI ONLINE/
+Copyright (c) 2020 TOYO KEIZAI ONLINE
 
 
 ## Author
